@@ -1,0 +1,91 @@
+import { defineTab } from '../helpers'
+import type { ModuleConfig } from '../../types'
+
+export const productsModule: ModuleConfig = {
+  id: 'products',
+  title: '产品库',
+  code: 'P-01 — P-08',
+  description: '产品档案、特性、工艺版本和物料配方主数据中心',
+  metrics: [
+    { label: '产品总数', value: '24', hint: '正式 21 · 草稿 3', tone: 'blue' },
+    { label: '本月新增', value: '4', hint: '丁腈产品 3 个', tone: 'green' },
+    { label: '待完善', value: '2', hint: '缺少工艺或配方', tone: 'amber' },
+    { label: '已停用', value: '1', hint: '历史单据仍可追溯', tone: 'gray' },
+  ],
+  tabs: [
+    defineTab({
+      name: '产品档案',
+      prefix: 'P',
+      createLabel: '新建产品',
+      columns: 'id:产品编号, name:产品名称*, type:产品类型, spec:规格特性*, quality:品质要求, version:版本, owner:责任人, status:状态',
+      data: [
+        ['P-NBR-BLK-M-001', '黑色 M 码丁腈手套', '丁腈手套', '黑色 · M · 3.5g · 240mm', 'AQL 1.5', 'V1.0', '张伟', '正式'],
+        ['P-NBR-BLU-L-001', '蓝色 L 码丁腈手套', '丁腈手套', '蓝色 · L · 4.0g · 250mm', 'AQL 1.5', 'V1.0', '张伟', '正式'],
+        ['P-NBR-BLU-M-001', '蓝色 M 码丁腈手套', '丁腈手套', '蓝色 · M · 3.6g · 240mm', 'AQL 1.5', 'V1.1', '张伟', '正式'],
+        ['P-NBR-BLK-L-001', '黑色 L 码丁腈手套', '丁腈手套', '黑色 · L · 4.2g · 250mm', 'AQL 1.5', 'V1.0', '张伟', '正式'],
+        ['P-LTX-WHT-M-001', '白色 M 码天然乳胶手套', '天然乳胶', '白色 · M · 4.5g · 240mm', 'AQL 1.5', 'V1.0', '李娜', '正式'],
+        ['P-LTX-WHT-S-001', '白色 S 码天然乳胶手套', '天然乳胶', '白色 · S · 4.2g · 230mm', 'AQL 1.5', 'V1.0', '李娜', '正式'],
+        ['P-NBR-BLK-XL-001', '黑色 XL 码丁腈手套', '丁腈手套', '黑色 · XL · 4.8g · 260mm', 'AQL 2.5', 'V0.8', '张伟', '草稿'],
+        ['P-NBR-BLU-XL-001', '蓝色 XL 码丁腈手套', '丁腈手套', '蓝色 · XL · 4.9g · 260mm', 'AQL 2.5', 'V0.9', '张伟', '草稿'],
+        ['P-NBR-BLK-S-001', '黑色 S 码丁腈手套', '丁腈手套', '黑色 · S · 3.2g · 230mm', 'AQL 1.5', 'V1.0', '张伟', '正式'],
+        ['P-LTX-WHT-L-001', '白色 L 码天然乳胶手套', '天然乳胶', '白色 · L · 4.8g · 250mm', 'AQL 1.5', 'V1.0', '李娜', '已停用'],
+      ],
+    }),
+    defineTab({
+      name: '产品特性',
+      prefix: 'FEATURE',
+      createLabel: '新增产品特性',
+      columns: 'id:特性编号, product:产品*, color:颜色, size:尺码, weight:克重, length:长度, tension:拉力, status:状态',
+      data: [
+        ['FEATURE-NBR-BLK-M', 'P-NBR-BLK-M-001 · 黑色 M 码丁腈手套', '黑色', 'M', '3.5 g', '240 mm', '≥ 6.0 N', '生效'],
+        ['FEATURE-NBR-BLU-L', 'P-NBR-BLU-L-001 · 蓝色 L 码丁腈手套', '蓝色', 'L', '4.0 g', '250 mm', '≥ 6.0 N', '生效'],
+        ['FEATURE-NBR-BLU-M', 'P-NBR-BLU-M-001 · 蓝色 M 码丁腈手套', '蓝色', 'M', '3.6 g', '240 mm', '≥ 6.0 N', '生效'],
+        ['FEATURE-LTX-WHT-M', 'P-LTX-WHT-M-001 · 白色 M 码乳胶手套', '白色', 'M', '4.5 g', '240 mm', '≥ 7.5 N', '生效'],
+        ['FEATURE-NBR-BLK-XL', 'P-NBR-BLK-XL-001 · 黑色 XL 码丁腈手套', '黑色', 'XL', '4.8 g', '260 mm', '≥ 6.0 N', '草稿'],
+      ],
+    }),
+    defineTab({
+      name: '工艺参数',
+      prefix: 'PROC',
+      createLabel: '新增工艺参数',
+      columns: 'id:工艺编号, product:产品*, step:工序, param:参数名称*, standard:标准值, lower:下限, upper:上限, version:工艺版本, status:状态',
+      data: [
+        ['PROC-NBR-M-001', 'P-NBR-BLK-M-001 · 黑色 M 码丁腈手套', '浸渍', '胶槽温度', '28 ℃', '26 ℃', '30 ℃', 'V1.0', '生效'],
+        ['PROC-NBR-M-002', 'P-NBR-BLK-M-001 · 黑色 M 码丁腈手套', '烘干', '主烘箱温度', '135 ℃', '130 ℃', '140 ℃', 'V1.0', '生效'],
+        ['PROC-NBR-M-003', 'P-NBR-BLK-M-001 · 黑色 M 码丁腈手套', '硫化', '硫化时间', '18 min', '16 min', '20 min', 'V1.0', '生效'],
+        ['PROC-NBR-L-001', 'P-NBR-BLU-L-001 · 蓝色 L 码丁腈手套', '浸渍', '胶槽温度', '29 ℃', '27 ℃', '31 ℃', 'V1.0', '生效'],
+        ['PROC-LTX-M-001', 'P-LTX-WHT-M-001 · 白色 M 码乳胶手套', '浸渍', '乳胶槽温度', '27 ℃', '25 ℃', '29 ℃', 'V1.0', '生效'],
+        ['PROC-LTX-M-002', 'P-LTX-WHT-M-001 · 白色 M 码乳胶手套', '烘干', '主烘箱温度', '128 ℃', '124 ℃', '132 ℃', 'V1.0', '生效'],
+        ['PROC-NBR-M-004', 'P-NBR-BLK-M-001 · 黑色 M 码丁腈手套', '浸渍', '胶槽温度', '28 ℃', '26.5 ℃', '29.5 ℃', 'V1.1', '草稿'],
+      ],
+    }),
+    defineTab({
+      name: '物料配方',
+      prefix: 'BOM',
+      createLabel: '新增配方明细',
+      columns: 'id:配方编号, product:产品*, material:物料*, category:物料类别, usage:单位用量, unit:计量单位, loss:损耗率, version:配方版本, status:状态',
+      data: [
+        ['BOM-NBR-M-001', 'P-NBR-BLK-M-001 · 黑色 M 码丁腈手套', '丁腈胶乳 · RM-NBR-001', '原料', '4.20', 'g / 只', '1.5%', 'V1.0', '生效'],
+        ['BOM-NBR-M-002', 'P-NBR-BLK-M-001 · 黑色 M 码丁腈手套', '硫磺 · RM-SUL-002', '辅料', '0.06', 'g / 只', '1.0%', 'V1.0', '生效'],
+        ['BOM-NBR-M-003', 'P-NBR-BLK-M-001 · 黑色 M 码丁腈手套', '氧化锌 · RM-ZNO-003', '辅料', '0.03', 'g / 只', '1.0%', 'V1.0', '生效'],
+        ['BOM-NBR-M-004', 'P-NBR-BLK-M-001 · 黑色 M 码丁腈手套', 'M 码专用纸盒 · PK-BOX-M-001', '包材', '0.01', '个 / 只', '0.5%', 'V1.0', '生效'],
+        ['BOM-NBR-L-001', 'P-NBR-BLU-L-001 · 蓝色 L 码丁腈手套', '丁腈胶乳 · RM-NBR-001', '原料', '4.80', 'g / 只', '1.5%', 'V1.0', '生效'],
+        ['BOM-LTX-M-001', 'P-LTX-WHT-M-001 · 白色 M 码乳胶手套', '天然乳胶 · RM-LTX-001', '原料', '5.40', 'g / 只', '1.8%', 'V1.0', '生效'],
+        ['BOM-LTX-M-002', 'P-LTX-WHT-M-001 · 白色 M 码乳胶手套', '硫磺 · RM-SUL-002', '辅料', '0.07', 'g / 只', '1.0%', 'V1.0', '生效'],
+      ],
+    }),
+    defineTab({
+      name: '版本记录',
+      prefix: 'VER',
+      createLabel: '新增版本记录',
+      columns: 'id:版本记录号, product:产品*, version:版本号, change:变更内容*, effect:生效时间, operator:变更人, refs:引用单据, status:状态',
+      data: [
+        ['VER-NBR-M-V10', 'P-NBR-BLK-M-001 · 黑色 M 码丁腈手套', 'V1.0', '首次发布产品档案、工艺与配方', '2026-06-01', '张伟', 'SO20260831001 等 14 单', '正式'],
+        ['VER-NBR-BLU-M-V11', 'P-NBR-BLU-M-001 · 蓝色 M 码丁腈手套', 'V1.1', '调整胶槽温度上下限，新增拉力要求', '2026-08-15', '张伟', 'SO20260829003', '正式'],
+        ['VER-NBR-BLU-M-V10', 'P-NBR-BLU-M-001 · 蓝色 M 码丁腈手套', 'V1.0', '历史版本，供既有订单继续引用', '2026-05-20', '张伟', 'SO20260712004', '历史'],
+        ['VER-NBR-XL-V08', 'P-NBR-BLK-XL-001 · 黑色 XL 码丁腈手套', 'V0.8', '草稿版本，工艺参数待补充', '—', '张伟', '—', '草稿'],
+        ['VER-LTX-M-V10', 'P-LTX-WHT-M-001 · 白色 M 码乳胶手套', 'V1.0', '首次发布产品档案、工艺与配方', '2026-06-18', '李娜', 'IO20260831001', '正式'],
+      ],
+    }),
+  ],
+}

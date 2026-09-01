@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "weilu-mes-web",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "weilu_MES/web_example/WEILU_example"],
+      "port": 5173
+    }
+  ]
+}
