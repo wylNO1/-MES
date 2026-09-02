@@ -170,10 +170,10 @@ button { cursor: pointer; }
 .mono-cell { color: #245fce !important; font: 600 8px 'JetBrains Mono' !important; }
 .data-status { display: inline-flex; align-items: center; gap: 5px; min-width: 44px; padding: 4px 7px; border-radius: 10px; background: #edf2f6; color: #69778c; font-size: 8px; font-weight: 600; justify-content: center; }
 .data-status::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
-.data-status[data-status='正式'], .data-status[data-status='合格'], .data-status[data-status='正常'], .data-status[data-status='运行'], .data-status[data-status='已完成'] { background: #e9f7f2; color: #17875f; }
+.data-status[data-status='正式'], .data-status[data-status='正常'], .data-status[data-status='运行'], .data-status[data-status='已完成'] { background: #e9f7f2; color: #17875f; }
 .data-status[data-status='执行中'], .data-status[data-status='生产中'], .data-status[data-status='已下达'] { background: #eaf2ff; color: #2a67db; }
-.data-status[data-status='草稿'], .data-status[data-status='待审核'], .data-status[data-status='待排产'], .data-status[data-status='待执行'], .data-status[data-status='待判定'], .data-status[data-status='待机'] { background: #fff4e3; color: #bf7714; }
-.data-status[data-status='不合格'], .data-status[data-status='异常'], .data-status[data-status='报警'] { background: #fff0f0; color: #d94f4f; }
+.data-status[data-status='草稿'], .data-status[data-status='待审核'], .data-status[data-status='待排产'], .data-status[data-status='待执行'], .data-status[data-status='待上架'], .data-status[data-status='待机'] { background: #fff4e3; color: #bf7714; }
+.data-status[data-status='异常'], .data-status[data-status='报警'] { background: #fff0f0; color: #d94f4f; }
 .row-action { border: 0; background: transparent; color: #2c6df2; font-size: 8px; padding: 5px; }
 .empty-cell { height: 120px !important; text-align: center !important; color: #96a1b1 !important; }
 .table-footer { min-height: 48px; display: flex; justify-content: space-between; align-items: center; padding: 0 16px; color: #8a96a7; font-size: 8px; }

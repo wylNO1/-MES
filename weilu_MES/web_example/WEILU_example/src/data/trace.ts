@@ -22,11 +22,6 @@ const STAGE_ORDER: Record<string, number> = {
   'production::生产组织': 32,
   'production::原料耗用': 34,
   'production::生产报工': 36,
-  'quality::待检任务': 40,
-  'quality::原料检验': 42,
-  'quality::过程检验': 44,
-  'quality::成品检验': 46,
-  'quality::质量处置': 48,
   'production::成品入库': 50,
   'warehouse::入出库记录': 52,
   'warehouse::原料库存': 54,
@@ -152,7 +147,7 @@ function collect(origin: Entry, byToken: Map<string, Entry[]>): Map<string, { en
 
 /**
  * 先保证每个业务阶段至少保留一条最贴近起点的记录，再按距离补充同阶段的第二条，
- * 避免链路被前段的关联记录占满而看不到检验、入库和库存环节。
+ * 避免链路被前段的关联记录占满而看不到入库和库存环节。
  */
 function orderNodes(found: Map<string, { entry: Entry; depth: number }>, origin: Entry): Entry[] {
   const stages = new Map<number, { entry: Entry; depth: number }[]>()

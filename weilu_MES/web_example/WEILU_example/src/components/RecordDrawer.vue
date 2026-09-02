@@ -78,7 +78,7 @@ function save() {
 
         <div class="trace-box">
           <b>关联与追溯</b>
-          <p v-if="hasChain">该记录已按业务编号关联到其他模块数据，可查看订单、排产、生产任务、报工、检验与库存批次的完整流转。</p>
+          <p v-if="hasChain">该记录已按业务编号关联到其他模块数据，可查看订单、排产、生产任务、报工与库存批次的完整流转。</p>
           <p v-else>该记录暂未检索到关联的业务编号，可从订单、排产计划或生产任务记录进入完整链路。</p>
           <button type="button" @click="emit('trace')">查看完整业务链路 →</button>
         </div>

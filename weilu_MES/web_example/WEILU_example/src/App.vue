@@ -159,7 +159,7 @@ onBeforeUnmount(() => {
                 <span class="notify-copy"><b>{{ item.title }}</b><small>{{ item.meta }}</small></span>
                 <span class="notify-time">{{ item.time }}</span>
               </button>
-              <footer>通知为页面样例数据，正式系统应由中控接口、品质与生产事件推送。</footer>
+              <footer>通知为页面样例数据，正式系统应由中控接口与生产事件推送。</footer>
             </section>
           </div>
 

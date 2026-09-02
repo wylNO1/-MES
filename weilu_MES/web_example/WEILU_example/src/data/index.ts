@@ -3,7 +3,6 @@ import { interfacesModule } from './modules/interfaces'
 import { ordersModule } from './modules/orders'
 import { productionModule } from './modules/production'
 import { productsModule } from './modules/products'
-import { qualityModule } from './modules/quality'
 import { scheduleModule } from './modules/schedule'
 import { warehouseModule } from './modules/warehouse'
 import type { ModuleConfig } from '../types'
@@ -14,7 +13,6 @@ export const modules: ModuleConfig[] = [
   productionModule,
   warehouseModule,
   productsModule,
-  qualityModule,
   equipmentModule,
   interfacesModule,
 ]

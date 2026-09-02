@@ -26,7 +26,7 @@ export function rowsOf(columns: Column[], data: string[][]): Row[] {
 
 const SELECT_KEYS = [
   'status', 'priority', 'owner', 'inspector', 'type', 'line', 'warehouse', 'location',
-  'direction', 'method', 'level', 'result', 'category', 'unit', 'quality', 'source', 'action',
+  'direction', 'method', 'level', 'result', 'category', 'unit', 'source', 'action',
 ]
 const TEXTAREA_KEYS = ['remark', 'reason', 'detail', 'note', 'summary', 'message']
 
