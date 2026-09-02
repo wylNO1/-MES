@@ -1,10 +1,32 @@
-/*
-唯律 MES 一期网页版映射模型
-版本：V2.0-web
-数据基线：weilu_MES/web_example/WEILU_example/src/data（2026-09-01 当前工作区）
-说明：基础数据作为人员、客户、产品、物料、仓库、库区和产线的公共引用源；
-业务页面与样例记录以当前网页版为准。本注释不参与模型结构解析。
-*/
+/* ============================== 首页 ============================== */
+
+$首页@(Highlight=Yes,Position=(1,1),Size=(1,0.12))*系统信息@(ShowHide=Hide):{系统名称@(ShowHide=Hide)}@(EditRead=Read,Type=Form,SubType=Text,TextSize=25,TextRGBA=(26,82,149,1)):[唯律 MES 管理系统]
+
+$首页@(Highlight=Yes,Position=(2,1),Size=(0.25,0.13))*核心指标1@(ShowHide=Hide):{今日计划产量}@(EditRead=Read,Type=Form,SubType=Block,TextSize=18):[108000 只]
+    
+$首页@(Highlight=Yes,Position=(2,2),Size=(0.25,0.13))*核心指标2@(ShowHide=Hide):{今日已完成}@(EditRead=Read,Type=Form,SubType=Block,TextSize=18):[82460 只]
+
+$首页@(Highlight=Yes,Position=(2,3),Size=(0.25,0.13))*核心指标3@(ShowHide=Hide):{在制订单}@(EditRead=Read,Type=Form,SubType=Block,TextSize=18):[12 单]
+
+$首页@(Highlight=Yes,Position=(2,4),Size=(0.25,0.13))*核心指标4@(ShowHide=Hide):{设备综合效率}@(EditRead=Read,Type=Form,SubType=Block,TextSize=18):[91.8 %]
+
+$首页@(Highlight=Yes,Position=(3,1),Size=(0.5,0.3))*业务链路:{阶段,数量,详情,状态}@(EditRead=Read,Type=Table,SubType=Block,ButtonShow=No):[
+[订单审核,18,3 待处理,预警],
+[库存校验,15,1 单缺料,异常],
+[人工排产,14,2 待分配,预警],
+[生产执行,12,8 条线运行,正常],
+[成品入库,8,'44,300 只',正常]]
+
+$首页@(Highlight=Yes,Position=(3,2),Size=(0.5,0.3))*待办预警:{级别,标题,业务信息,归属,目标记录}@(EditRead=Read,Type=Table,SubType=Block,ButtonShow=No):[
+[紧急,销售订单临近交期,SO20260831001 · 还有 2 天,订单中心,SO20260831001],
+[缺料,M 码专用纸盒库存不足,缺口 400 个 · 影响包装线 01,仓库中心,INV-PK-001],
+[待审,生产报工等待审核,'REPORT20260901002 · 报工 27,200 只',生产中心,REPORT20260901002]]
+
+$首页@(Highlight=Yes,Position=(4,1),Size=(1,0.3))*产线进度:{产线编码==$基础数据:产线档案*产线列表:{产线编码},产线名称,订单编号,产品==$基础数据:产品引用*产品引用列表:{产品名称},进度,状态=运行||待机,产出 / 计划}@(EditRead=Read,Type=Table,SubType=Block,ButtonShow=No):[
+[LINE-PKG-01,包装线 01,SO20260831001,黑色 M 码丁腈手套,75%,运行,'45,000 / 60,000'],
+[LINE-DIP-01,浸渍线 01,SO20260831002,蓝色 L 码丁腈手套,34%,运行,'27,200 / 80,000'],
+[LINE-PKG-02,包装线 02,IO20260831001,白色 M 码乳胶手套,18%,待机,'9,000 / 50,000'],
+[LINE-DIP-02,浸渍线 02,SO20260829003,蓝色 M 码丁腈手套,62%,运行,'31,000 / 50,000']]
 
 /* ============================== 基础数据 ============================== */
 
@@ -407,37 +429,3 @@ $接口中心:接口清单*异常日志@(Tab=1):{异常编号,所属接口==$接
 [ERR-20260901002,IF-PLC-STATUS,报文时间戳超过允许偏差 60 秒,E-4010,MSG-202609010012,09-01 10:18:22,1,接口运维组,未处理],
 [ERR-20260901003,IF-PLC-COUNT,累计计数值小于上次上报值,E-4022,MSG-202609010009,09-01 09:05:11,1,接口运维组,已处理],
 [ERR-20260831004,IF-PLC-ALARM,报警代码 E-999 未在字典中登记,E-4030,MSG-202608310144,08-31 22:47:03,0,接口运维组,已处理]]
-
-/* ============================== 运营总览 ============================== */
-
-$运营总览@(Highlight=Yes,Position=(1,1),Size=(1,0.12))*系统信息:{系统名称,范围,数据基线}@(EditRead=Read,Type=Form,SubType=Text):[唯律 MES 管理系统,一期参考模型,2026-09-01 网页版]
-
-$运营总览@(Highlight=Yes,Position=(2,1),Size=(1,0.2))*关键指标:{指标,数值,单位,变化 / 说明,进度}@(EditRead=Read,Type=Table,SubType=Block,ButtonShow=No):[
-[今日计划产量,'108,000',只,较昨日 +8.2%,76%],
-[今日已完成,'82,460',只,计划达成 76.4%,76%],
-[在制订单,12,单,2 单临近交期,58%],
-[设备综合效率,91.8,%,较昨日 +1.6%,92%]]
-
-$运营总览@(Highlight=Yes,Position=(3,1),Size=(0.5,0.3))*业务链路:{阶段,数量,详情,状态}@(EditRead=Read,Type=Table,SubType=Block,ButtonShow=No):[
-[订单审核,18,3 待处理,预警],
-[库存校验,15,1 单缺料,异常],
-[人工排产,14,2 待分配,预警],
-[生产执行,12,8 条线运行,正常],
-[成品入库,8,'44,300 只',正常]]
-
-$运营总览@(Highlight=Yes,Position=(3,2),Size=(0.5,0.3))*待办预警:{级别,标题,业务信息,归属,目标记录}@(EditRead=Read,Type=Table,SubType=Block,ButtonShow=No):[
-[紧急,销售订单临近交期,SO20260831001 · 还有 2 天,订单中心,SO20260831001],
-[缺料,M 码专用纸盒库存不足,缺口 400 个 · 影响包装线 01,仓库中心,INV-PK-001],
-[待审,生产报工等待审核,'REPORT20260901002 · 报工 27,200 只',生产中心,REPORT20260901002]]
-
-$运营总览@(Highlight=Yes,Position=(4,1),Size=(1,0.3))*产线进度:{产线编码==$基础数据:产线档案*产线列表:{产线编码},产线名称,订单编号,产品==$基础数据:产品引用*产品引用列表:{产品名称},进度,状态=运行||待机,产出 / 计划}@(EditRead=Read,Type=Table,SubType=Block,ButtonShow=No):[
-[LINE-PKG-01,包装线 01,SO20260831001,黑色 M 码丁腈手套,75%,运行,'45,000 / 60,000'],
-[LINE-DIP-01,浸渍线 01,SO20260831002,蓝色 L 码丁腈手套,34%,运行,'27,200 / 80,000'],
-[LINE-PKG-02,包装线 02,IO20260831001,白色 M 码乳胶手套,18%,待机,'9,000 / 50,000'],
-[LINE-DIP-02,浸渍线 02,SO20260829003,蓝色 M 码丁腈手套,62%,运行,'31,000 / 50,000']]
-
-$运营总览@(Highlight=Yes,Position=(5,1),Size=(1,0.3))*产线进度图:{包装线 01,浸渍线 01,包装线 02,浸渍线 02}@(EditRead=Read,Type=Chart,SubType=Bar,Name=(产线进度,Up)):[75,34,18,62]
-
-$运营总览@(Highlight=Yes,Position=(6,1),Size=(1,0.2))*通知列表:{通知编号,级别,标题,业务信息,时间,目标记录}@(EditRead=Read,Type=Table,SubType=Block,ButtonShow=No):[
-[N-001,报警,包装机 01 主烘箱温度超限,ALARM20260901001 · E-203 · 影响包装线 01,11:42,ALARM20260901001],
-[N-004,待办,生产报工等待审核,'REPORT20260901002 · 报工 27,200 只',10:05,REPORT20260901002]]
