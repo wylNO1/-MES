@@ -436,3 +436,47 @@ $接口中心:接口清单*异常日志@(Tab=1):{异常编号,所属接口==$接
 [ERR-20260901002,IF-PLC-STATUS,报文时间戳超过允许偏差 60 秒,E-4010,MSG-202609010012,09-01 10:18:22,1,接口运维组,未处理],
 [ERR-20260901003,IF-PLC-COUNT,累计计数值小于上次上报值,E-4022,MSG-202609010009,09-01 09:05:11,1,接口运维组,已处理],
 [ERR-20260831004,IF-PLC-ALARM,报警代码 E-999 未在字典中登记,E-4030,MSG-202608310144,08-31 22:47:03,0,接口运维组,已处理]]
+
+/* ============================== 记录详情页 ============================== */
+
+/* ---------- 订单管理 · 销售订单详情 ---------- */
+$订单管理:{销售订单}@(ShowHide=Hide,InputRequired=Yes,Placeholder=请选择订单编号,EmptyText=请先选择订单编号)*订单基本信息:{订单编号,客户,产品,订单数量,交期@(Type=Date),优先级=普通@(TextRGBA=(98,110,130,1),TextBackRGBA=(237,242,246,1))||加急@(TextRGBA=(210,45,45,1),TextBackRGBA=(255,240,240,1)),责任人,状态=待审核@(TextRGBA=(158,98,17,1),TextBackRGBA=(255,244,227,1))||待排产@(TextRGBA=(158,98,17,1),TextBackRGBA=(255,244,227,1))||生产中@(TextRGBA=(42,103,219,1),TextBackRGBA=(234,242,255,1))||已完成@(TextRGBA=(22,126,89,1),TextBackRGBA=(233,247,242,1))||已终止@(TextRGBA=(210,45,45,1),TextBackRGBA=(255,240,240,1))}@(EditRead=Read,MaxColumn=8,MaxRow=8,Type=Form,SubType=Text,TextSize=16,MainParam=(订单编号))
+
+$订单管理:{销售订单}@(ShowHide=Hide)*关联与追溯:{追溯说明}@(EditRead=Read,Type=Form,SubType=Text,MainParam=(订单编号)):[
+按订单编号可向下追溯到排产计划、产线分配、生产任务、生产报工、成品入库与成品库存批次；正反向追溯链路由后端按业务关系与权限生成。]
+
+/* ---------- 人工排产 · 待排订单详情 ---------- */
+$人工排产:{待排订单}@(ShowHide=Hide,InputRequired=Yes,Placeholder=请选择订单编号,EmptyText=请先选择订单编号)*排产基本信息:{订单编号,产品,订单数量,剩余待排,交期@(Type=Date),齐套情况,计划员,状态=待排产@(TextRGBA=(158,98,17,1),TextBackRGBA=(255,244,227,1))||齐套异常@(TextRGBA=(210,45,45,1),TextBackRGBA=(255,240,240,1))||待审核@(TextRGBA=(158,98,17,1),TextBackRGBA=(255,244,227,1))||已完成@(TextRGBA=(22,126,89,1),TextBackRGBA=(233,247,242,1))}@(EditRead=Read,MaxColumn=8,MaxRow=8,Type=Form,SubType=Text,TextSize=16,MainParam=(订单编号))
+
+$人工排产:{待排订单}@(ShowHide=Hide)*关联与追溯:{追溯说明}@(EditRead=Read,Type=Form,SubType=Text,MainParam=(订单编号)):[
+按订单编号可向上追溯到销售订单或库存订单、向下追溯到排产计划、产线分配与生产任务；齐套判定与资源占用由应用实现。]
+
+/* ---------- 生产执行 · 生产任务详情 ---------- */
+$生产执行:{生产任务}@(ShowHide=Hide,InputRequired=Yes,Placeholder=请选择生产任务号,EmptyText=请先选择生产任务号)*任务基本信息:{生产任务号,订单编号,产线,产品,计划数量,累计报工,完成率,预计结束,责任人,状态=待执行@(TextRGBA=(158,98,17,1),TextBackRGBA=(255,244,227,1))||执行中@(TextRGBA=(42,103,219,1),TextBackRGBA=(234,242,255,1))||已完成@(TextRGBA=(22,126,89,1),TextBackRGBA=(233,247,242,1))||暂停@(TextRGBA=(98,110,130,1),TextBackRGBA=(237,242,246,1))}@(EditRead=Read,MaxColumn=8,MaxRow=8,Type=Form,SubType=Text,TextSize=16,MainParam=(生产任务号))
+
+$生产执行:{生产任务}@(ShowHide=Hide)*关联与追溯:{追溯说明}@(EditRead=Read,Type=Form,SubType=Text,MainParam=(生产任务号)):[
+按生产任务号可追溯到排产计划、原料耗用、生产报工、成品入库与成品库存批次；实时进度与完成率由应用计算。]
+
+/* ---------- 仓库管理 · 库存记录详情 ---------- */
+$仓库管理:{库存总览}@(ShowHide=Hide,InputRequired=Yes,Placeholder=请选择库存记录号,EmptyText=请先选择库存记录号)*库存基本信息:{库存记录号,物料 / 产品,批次号,仓库 / 库区,库存数量,可用数量,占用数量,入库日期@(Type=Date),库存状态=已上架@(TextRGBA=(22,126,89,1),TextBackRGBA=(233,247,242,1))||待上架@(TextRGBA=(158,98,17,1),TextBackRGBA=(255,244,227,1))||已锁定@(TextRGBA=(210,45,45,1),TextBackRGBA=(255,240,240,1))}@(EditRead=Read,MaxColumn=8,MaxRow=8,Type=Form,SubType=Text,TextSize=16,MainParam=(库存记录号))
+
+$仓库管理:{库存总览}@(ShowHide=Hide)*关联与追溯:{追溯说明}@(EditRead=Read,Type=Form,SubType=Text,MainParam=(库存记录号)):[
+按批次号与库存记录号可追溯到成品入库、原料耗用、入出库记录与来源生产任务；占用、释放与过账由后端事务保证。]
+
+/* ---------- 产品库 · 产品档案详情 ---------- */
+$产品库:{产品档案}@(ShowHide=Hide,InputRequired=Yes,Placeholder=请选择产品编号,EmptyText=请先选择产品编号)*产品基本信息:{产品编号,产品名称,产品类型=丁腈手套||天然乳胶,规格特性,版本,责任人,状态=正式@(TextRGBA=(22,126,89,1),TextBackRGBA=(233,247,242,1))||草稿@(TextRGBA=(158,98,17,1),TextBackRGBA=(255,244,227,1))||已停用@(TextRGBA=(98,110,130,1),TextBackRGBA=(237,242,246,1))}@(EditRead=Read,MaxColumn=8,MaxRow=8,Type=Form,SubType=Text,TextSize=16,MainParam=(产品编号))
+
+$产品库:{产品档案}@(ShowHide=Hide)*关联与追溯:{追溯说明}@(EditRead=Read,Type=Form,SubType=Text,MainParam=(产品编号)):[
+按产品编号可追溯到产品特性、工艺参数、物料配方、版本记录与引用该产品的订单和排产计划。]
+
+/* ---------- 设备管理 · 设备台账详情 ---------- */
+$设备管理:{设备台账}@(ShowHide=Hide,InputRequired=Yes,Placeholder=请选择设备编号,EmptyText=请先选择设备编号)*设备基本信息:{设备编号,设备名称,类别=浸渍设备||烘干设备||点数机||包装机||分拣设备||装箱码垛||上料线||扣合机,型号,所属产线,所属车间,责任人,数据新鲜度,状态=运行@(TextRGBA=(22,126,89,1),TextBackRGBA=(233,247,242,1))||报警@(TextRGBA=(210,45,45,1),TextBackRGBA=(255,240,240,1))||维护@(TextRGBA=(158,98,17,1),TextBackRGBA=(255,244,227,1))||停用@(TextRGBA=(98,110,130,1),TextBackRGBA=(237,242,246,1))}@(EditRead=Read,MaxColumn=8,MaxRow=8,Type=Form,SubType=Text,TextSize=16,MainParam=(设备编号))
+
+$设备管理:{设备台账}@(ShowHide=Hide)*关联与追溯:{追溯说明}@(EditRead=Read,Type=Form,SubType=Text,MainParam=(设备编号)):[
+按设备编号可追溯到实时状态、报警记录、采集数据、点位映射与所属接口；实时曲线与推送不由模型文本实现。]
+
+/* ---------- 接口中心 · 接口详情 ---------- */
+$接口中心:{接口清单}@(ShowHide=Hide,InputRequired=Yes,Placeholder=请选择接口编码,EmptyText=请先选择接口编码)*接口基本信息:{接口编码,接口名称,方向=中控 → MES||MES → 中控||ERP → MES,方式,频率,责任人,最近通信,状态=正常@(TextRGBA=(22,126,89,1),TextBackRGBA=(233,247,242,1))||停用@(TextRGBA=(98,110,130,1),TextBackRGBA=(237,242,246,1))}@(EditRead=Read,MaxColumn=8,MaxRow=8,Type=Form,SubType=Text,TextSize=16,MainParam=(接口编码))
+
+$接口中心:{接口清单}@(ShowHide=Hide)*关联与追溯:{追溯说明}@(EditRead=Read,Type=Form,SubType=Text,MainParam=(接口编码)):[
+按接口编码可追溯到点位映射、接收日志与异常日志；认证、重试与落库由接口服务实现。]
