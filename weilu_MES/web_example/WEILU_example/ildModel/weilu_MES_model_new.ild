@@ -2,13 +2,17 @@
 
 $首页@(Highlight=Yes,Position=(1,1),Size=(1,0.12))*系统信息@(ShowHide=Hide):{系统名称@(ShowHide=Hide)}@(EditRead=Read,Type=Form,SubType=Text,TextSize=25,TextRGBA=(26,82,149,1)):[唯律 MES 管理系统]
 
-$首页@(Highlight=Yes,Position=(2,1),Size=(0.25,0.13))*核心指标1@(ShowHide=Hide):{今日计划产量}@(EditRead=Read,Type=Form,SubType=Block,TextSize=18):[108000 只]
-    
-$首页@(Highlight=Yes,Position=(2,2),Size=(0.25,0.13))*核心指标2@(ShowHide=Hide):{今日已完成}@(EditRead=Read,Type=Form,SubType=Block,TextSize=18):[82460 只]
+/* 数据卡片：Type=Card,SubType=Data。
+   字段默认落位 —— 第 1 个是主数值，其余进脚注（可用 @(Area=Body|Foot) 覆盖）。
+   Head= 是卡片标题，TextRGBA= 是卡片顶部色条，@(Suffix=) 是数值单位。
+   数值按原样显示，不做千分位格式化。 */
+$首页@(Highlight=Yes,Position=(2,1),Size=(0.25,0.14))*核心指标1@(ShowHide=Hide):{计划产量@(Suffix=只),较昨日}@(EditRead=Read,Type=Card,SubType=Data,Head=今日计划产量,TextRGBA=(44,109,242,1)):[108000,较昨日 +8.2%]
 
-$首页@(Highlight=Yes,Position=(2,3),Size=(0.25,0.13))*核心指标3@(ShowHide=Hide):{在制订单}@(EditRead=Read,Type=Form,SubType=Block,TextSize=18):[12 单]
+$首页@(Highlight=Yes,Position=(2,2),Size=(0.25,0.14))*核心指标2@(ShowHide=Hide):{完成产量@(Suffix=只),计划达成}@(EditRead=Read,Type=Card,SubType=Data,Head=今日已完成,TextRGBA=(32,170,121,1)):[82460,计划达成 76.4%]
 
-$首页@(Highlight=Yes,Position=(2,4),Size=(0.25,0.13))*核心指标4@(ShowHide=Hide):{设备综合效率}@(EditRead=Read,Type=Form,SubType=Block,TextSize=18):[91.8 %]
+$首页@(Highlight=Yes,Position=(2,3),Size=(0.25,0.14))*核心指标3@(ShowHide=Hide):{在制数量@(Suffix=单),临近交期}@(EditRead=Read,Type=Card,SubType=Data,Head=在制订单,TextRGBA=(237,168,59,1)):[12,2 单临近交期]
+
+$首页@(Highlight=Yes,Position=(2,4),Size=(0.25,0.14))*核心指标4@(ShowHide=Hide):{综合效率@(Suffix=%),较昨日}@(EditRead=Read,Type=Card,SubType=Data,Head=设备综合效率,TextRGBA=(126,107,233,1)):[91.8,较昨日 +1.6%]
 
 $首页@(Highlight=Yes,Position=(3,1),Size=(0.5,0.3))*业务链路:{阶段,数量,详情,状态=正常@(TextRGBA=(22,126,89,1),TextBackRGBA=(233,247,242,1))||预警@(TextRGBA=(158,98,17,1),TextBackRGBA=(255,244,227,1))||异常@(TextRGBA=(210,45,45,1),TextBackRGBA=(255,240,240,1))}@(EditRead=Read,Type=Table,SubType=Block,ButtonShow=No):[
 [订单审核,18,3 待处理,预警],
